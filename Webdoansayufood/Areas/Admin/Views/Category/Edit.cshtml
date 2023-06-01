@@ -1,0 +1,82 @@
+﻿﻿@model Webdoansayufood.Models.Entity.Category
+@{
+    ViewBag.Title = "Cập nhập loại sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Cập nhập loại sản phẩm mới</h1>
+
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Category</a></li>
+                    <li class="breadcrumb-item active">Edit</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Điền thông tin</h3>
+
+        </div>
+        <div class="card-body">
+            <div class="card card-primary">
+                @using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false)
+                    @Html.HiddenFor(x => x.Id)
+                    <!-- form start -->
+                    <form>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tên sản phẩm</label>
+                                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Tên loại sản phẩm" })
+                                    @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mô tả</label>
+                                @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Mô tả" })
+                                @Html.ValidationMessageFor(x => x.Description, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <a href="~/Admin/Category/Index" class="btn btn-danger">Quay Lại</a>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--scripts -->
+@section scripts{
+    <script>
+        function Browse(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                document.getElementById(field).value = fileUrl;
+            };
+            finder.popup();
+        }
+    </script>
+
+
+
+}

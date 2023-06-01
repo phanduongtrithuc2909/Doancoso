@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Webdoansayufood.Models.Entity.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .product-section {
+        background-color: #f8f9fa;
+    }
+
+    .product-content {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #fff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+        margin-bottom: 15px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+        .product-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+    .product-content-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 20%;
+        margin-bottom: 30px;
+        object-fit: cover;
+    }
+
+    .product-content-text {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+</style>
+<div class="container product_section_container" style="margin-top: 140px">
+    <div class="row">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center" style="margin-bottom: 10px">
+                <ul>
+                    <li><a href="~/home/index">Trang Chủ</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản Phẩm</a></li>
+
+                </ul>
+
+            </div>
+            <div class="breadcrumbs d-flex flex-row align-items-center" style="margin-bottom: 10px">
+
+                @using (Html.BeginForm())
+                {
+                    <div class="form-group form-inline">
+                        Tìm sản phẩm: @Html.TextBox("SearchString", "", new { @class = "form-control" })
+                        <button type="submit" class="btn btn-default" value="Tìm kiếm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                }
+
+            </div>
+
+            <!-- Main Content -->
+            <section class="product-section">
+                <div class="container">
+                    <div class="row">
+                        @*<div class="col-md-4">*@
+                        @foreach (var item in Model)
+                        {
+                            <div class="product-content">
+                                <div class="product__img-box">
+                                    <div class="product__img-box-in">
+                                        <img class="product-content-img " src="@item.Image">
+
+                                    </div>
+                                    <div class="product__content">
+                                        <a href="@Url.Action("Detail", "Product", new { id = item.Id})" class="product-content-text">
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </a>
+                                    </div>
+                                    <div class="red_button add_to_cart_button"><a href="#"><i class="fa fa-heart" aria-hidden="true" style="width:50px"></i></a></div>
+                                    <div class="red_button add_to_cart_button"><a href="/ShoppingCart/AddToCart/@item.Id"><i class="fa fa-cart-plus" aria-hidden="true" style="width:150px"></i></a></div>
+                                    <div class="product__content">
+                                        <span class="product-content-text" style="color:red">
+                                            @Html.DisplayFor(modelItem => item.Price)
+                                        </span>
+                                    </div>
+
+                                </div> <!-- End Product Image -->
+                            </div>
+                        }
+                        @*</div>*@
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿﻿@model Webdoansayufood.Models.Entity.Product
+@{
+    ViewBag.Title = "Thêm mới sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thêm sản phẩm mới</h1>
+
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Product</a></li>
+                    <li class="breadcrumb-item active">Add</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Điền thông tin sản phẩm</h3>
+
+        </div>
+        <div class="card-body">
+            <div class="card card-primary">
+                @using (Html.BeginForm("Add", "Product", FormMethod.Post, new { }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false)
+                    <!-- form start -->
+                    <form>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Loại sản phẩm</label>
+                                    @Html.DropDownListFor(x => x.CategoryId, ViewBag.Category as SelectList, "-Chọn loại sản phẩm", new { @class = "form-control", @placeholder = "Loại sản phẩm" })
+                                    @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tên sản phẩm</label>
+                                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Tên sản phẩm" })
+                                    @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
+                                @Html.TextBoxFor(x => x.Image, new { @id = "Image", @class = "form-control", @placeholder = "Hình ảnh sản phẩm" })
+                                <input type="button" value="Tải ảnh" onclick="Browse('Image');" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mô tả</label>
+                                @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Mô tả" })
+                                @Html.ValidationMessageFor(x => x.Description, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Chi tiết sản phẩm</label>
+                                @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @placeholder = "Chi tiết sản phẩm" })
+                                @Html.ValidationMessageFor(x => x.Detail, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Số lượng</label>
+                                        @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control", @placeholder = "Số lượng" })
+                                        @Html.ValidationMessageFor(x => x.Quantity, null, new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Giá</label>
+                                        @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @placeholder = "Giá" })
+                                        @Html.ValidationMessageFor(x => x.Price, null, new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                            </div>
+                           
+
+
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <a href="~/Admin/Product" class="btn btn-danger">Quay Lại</a>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--scripts -->
+@section scripts{
+    <script>
+        function Browse(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                document.getElementById(field).value = fileUrl;
+            };
+            finder.popup();
+        }
+    </script>
+
+
+
+}

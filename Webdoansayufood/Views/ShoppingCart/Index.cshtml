@@ -1,0 +1,107 @@
+﻿@model Webdoansayufood.Models.ShoppingCart
+
+@{
+    ViewBag.Title = "Gio hang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    @if (Model != null)
+    {
+        <div class="container product_section_container" style="margin-top: 140px">
+            <div class="row">
+                <div class="col product_section clearfix">
+
+                    <!-- Breadcrumbs -->
+
+                    <div class="breadcrumbs d-flex flex-row align-items-center" style="margin-bottom: 10px">
+                        <ul>
+                            <li><a href="~/home/index">Trang Chủ</a></li>
+                            <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng của bạn</a></li>
+
+                        </ul>
+                        @*<ul> <li><a href="@Url.Action("Index", "Product")">Tiếp tục mua hàng</a></li></ul>*@
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Tên loại sản phẩm</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Số lượng còn</th>
+                                    <th>Số lượng mua</th>
+                                    <th>Giá</th>
+                                    <th>Tổng tiền</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    double total = (double)item.Shopping_Product.Price * item.Shopping_Quantity;
+
+                                    double sol = total / (double)item.Shopping_Product.Price;
+
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(model => item.Shopping_Product.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.Shopping_Product.Category.Title)
+                                        </td>
+                                        <td>
+                                            <a href="#"><img src="@Url.Content(item.Shopping_Product.Image)" style="width:100px; height:100px" /></a>
+                                        </td>
+                                        <td>
+                                            @using (Html.BeginForm("Update_quantity_cart", "ShoppingCart"))
+                                            {
+                                                <input type="number" value="@item.Shopping_Product.Quantity" name="quantity" style="width: 50px" />
+                                                <input type="hidden" value="@item.Shopping_Product.Id" name="Id_product" />
+                                                <input type="submit" value="Đổi" style="width: 50px" />
+                                            }
+
+                                        </td>
+                                        <td>
+                                            @sol
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.Shopping_Product.Price)
+                                        </td>
+                                        <td>
+                                            @total
+                                        </td>
+                                        <td>
+                                            <a href="~/ShoppingCart/XoaItemCart/@item.Shopping_Product.Id" class="btn btn-danger">Xóa sản phẩm</a>
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" style="text-align:right; width: 1085px">Tổng tiền giỏ hàng: <b>@Model.Total_money()</b></td>
+
+                                </tr>
+
+
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div style="text-align: right">
+                        <ul>
+                            <li>
+                                <a href="~/ShoppingCart/XoaAllItemCart" class="btn btn-sm btn-danger" style="font-size: 15px; border-radius: 10%; margin-right:10px">Xoá hết</a><a href="~/Shoppingcart/checkout" class="btn btn-sm btn-success" style="font-size: 15px; border-radius: 10%">Thanh toán</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+
+</body>

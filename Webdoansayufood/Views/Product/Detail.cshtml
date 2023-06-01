@@ -1,0 +1,93 @@
+﻿@model Webdoansayufood.Models.Entity.Product
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/aset/styles/single_styles.css" rel="stylesheet" />
+<link href="~/Content/aset/styles/single_responsive.css" rel="stylesheet" />
+<div class="container product_section_container" style="margin-top: 140px">
+    <div class="row">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center" style="margin-bottom: 10px">
+                <ul>
+                    <li><a href="~/home/index">Trang Chủ</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản Phẩm</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Chi tiết : @Model.Title</a></li>
+
+                </ul>
+
+            </div>
+            
+            <div class="container">
+                <div class="col-lg-5">
+                        <div class="single_product_image_background"><img src="@Model.Image" style="height: 402px"/></div>
+                    </div>
+                <div class="col-lg-5">
+                    <div class="product_details">
+                        <div class="product_details_title">
+                            <h2>@Model.Title</h2>
+                            <p>@Model.Detail</p>
+                        </div>
+                        <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
+                            <span class="ti-truck"></span><span>Giao hàng miễn phí</span>
+                        </div>
+                        <div class="original_price">--</div>
+                        <div class="product_price">@Model.Price</div>
+                        <ul class="star_rating">
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                        </ul>
+                        <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                            <span>Số lượng còn:</span>
+                            <div class="quantity_selector">
+                                <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                <span id="quantity_value">@Model.Quantity</span>
+                                <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="red_button add_to_cart_button"><a href="/ShoppingCart/AddToCart/@Model.Id">add to cart</a></div>
+                            <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+<div class="tabs_section_container" style="margin-top:80px" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- Tab Additional Info -->
+
+                <div id="tab_2" class="tab_container active" style=" background-color: gainsboro"> 
+                    <div class="row">
+                        <div class="col additional_info_col">
+                            <div class="tab_title additional_info_title">
+                                <h4>Thông tin sản phẩm</h4>
+                            </div>
+                            <p>Tên sản phẩm:<span>@Model.Title</span></p>
+                            <p>Khối lượng:<span>@Model.Description</span></p>
+                            <p>Hướng dẫn bảo quản:<span>Nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp.</span></p>
+                            <p>Thông tin cảnh báo an toàn, vệ sinh:<span>Sản phẩm đảm bảo an toàn vệ sinh thực phẩm - không chất bảo quản.</span></p>
+                            <p>Lưu ý:<span>Không sử dụng sản phẩm khi có hiện tượng biến màu, mùi vị lạ.</span></p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

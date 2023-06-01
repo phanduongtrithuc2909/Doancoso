@@ -1,0 +1,287 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /* Product */
+    .services-section {
+        padding: 80px 0;
+        background-color: #f6f6f6;
+    }
+
+        .services-section h2 {
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #333;
+        }
+
+        .services-section .card {
+            border: none;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+            .services-section .card:hover {
+                box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+                transform: translateY(-5px);
+            }
+
+            .services-section .card img {
+                height: 200px;
+                object-fit: cover;
+            }
+
+        .services-section .card-body {
+            padding: 20px;
+        }
+
+        .services-section .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .services-section .card-text {
+            font-size: 25px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .services-section .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+            .services-section .btn-primary:hover {
+                background-color: #0062cc;
+                border-color: #0062cc;
+            }
+    /*li do*/
+    .testimonials-section {
+        padding: 80px 0;
+        background-color: #f8f9fa;
+    }
+
+    .testimonial {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #fff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+    }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+    .testimonial-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 30px;
+        object-fit: cover;
+    }
+
+    .testimonial-text {
+        font-size: 23px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+
+    .testimonial-author {
+        font-size: 16px;
+        font-weight: bold;
+        color: #666;
+    }
+    /*PR BANNER*/
+
+    .offer {
+        background: linear-gradient(to bottom, #a37b5f, #fceec7);
+        width: auto; /* chỉnh chiều rộng của hộp offer */
+        height: auto; /* chỉnh chiều cao của hộp offer */
+        margin: 0 auto; /* căn giữa hộp offer trong trang web */
+        display: block; /* định dạng hiển thị của hộp offer */
+    }
+
+        .offer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center; /* căn giữa nội dung trong khung .offer */
+        }
+
+    .offer-img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 500px;
+        height: 600px;
+        position: relative;
+        animation: slide-in 1s ease-in-out forwards;
+    }
+
+    .offer h1, .offer p {
+        text-align: center; /* căn giữa văn bản trong hộp */
+        margin-top: 120px; /* chỉnh khoảng cách giữa hộp offer và hai hộp khác */
+        position: relative;
+    }
+
+    .offer h1 {
+        animation: pulse 1s ease-in-out infinite;
+    }
+</style>
+<html>
+<body>
+
+
+    <!-- Slider -->
+    <main>
+        <div class="jumbotron jumbotron-fluid" style="margin-top: 140px; background-position-y: -350px; background-image: url('/Content/image-home-user/anh-chibi-cute_014001732.png'); height: 600px">
+            <div class="Tieude">
+                <div class="container">
+                    <h1 class="display-4">Chào mừng bạn đến với SAYUFOOD</h1>
+                    <div class="red_button shop_now_button"><a href="~/Product/Index">Shop now</a></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!-- Các loại sản phẩm -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="text-center">Sản phẩm của chúng tôi</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="~/Content/image-home-user/cac loai san pham ban chay.jpg" class="card-img-top" alt="Các loại bánh">
+                        <div class="card-body">
+                            <h3 class="card-title">Các Loại Bánh</h3>
+                            <p class="card-text">Một số các loại bánh ngon như là bánh sò hành, bánh tai heo nhí mix 3 Vị , bánh tai heo mắm ớt, bánh cá, ....</p>
+                            <a href="/product/index" class="btn btn-primary" name="Show">Tìm Hiểu Thêm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/Content/image-home-user/cac do kho.jpg" class="card-img-top" alt="Các loại khô">
+                        <div class="card-body">
+                            <h3 class="card-title">Các Loại Khô</h3>
+                            <p class="card-text">Một số sản phẩm khô như mực xé tẩm vị, khô bò miếng, khô gà bơ tỏi, ghẹ sữa rim, khô gà lá chanh,....</p>
+                            <a href="/product/index" class="btn btn-primary" name="Show">Tìm Hiểu Thêm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/Content/image-home-user/trái cây sấy.jpg" class="card-img-top" alt="Trái cây sấy">
+                        <div class="card-body">
+                            <h3 class="card-title">Trái Cây Sấy</h3>
+                            <p class="card-text">Một số trái cây sấy như chuối sấy mè gừng, khoai tây cọng sấy phomai, chuối sấy giòn,....</p>
+                            <a href="/product/index" class="btn btn-primary" name="Show">Tìm Hiểu Thêm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/Content/image-home-user/các loại nhập khẩu.jpg" class="card-img-top" alt="Bánh nhập khẩu">
+                        <div class="card-body">
+                            <h3 class="card-title">Bánh Nhập Khẩu</h3>
+                            <p class="card-text">Một số loại bánh nhập khẩu như miến trùng khánh, bánh đậu nành, bánh mochi đỏ, nho raisin, bánh ruốc gấu,...</p>
+                            <a href="/product/index" class="btn btn-primary" name="Show">Tìm Hiểu Thêm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/Content/image-home-user/com-chay-cha-bong-sai-gon-5_1629035865.jpg" class="card-img-top" alt="Cơm Cháy">
+                        <div class="card-body">
+                            <h3 class="card-title">Cơm Cháy</h3>
+                            <p class="card-text">Một số cơm cháy như cơm cháy lắc khô bò, cơm cháy chà bông, cơm cháy rong biển, cơm cháy lắc khô gà,...</p>
+                            <a href="/product/index" class="btn btn-primary" name="Show">Tìm Hiểu Thêm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/Content/image-home-user/các-loại-hạt-dinh-dưỡng-tốt-cho-sức-khỏe.jpg" class="card-img-top" alt="Các loại hạt">
+                        <div class="card-body">
+                            <h3 class="card-title">Các Loại Hạt</h3>
+                            <p class="card-text">Một số hạt như hạt điều rang tỏi ớt, hạt dưa, hạt hướng dương, hạt bí, hạt bí xanh rang tỏi ớt, hạt dẻ cười tẩy,....</p>
+                            <a href="/product/index" class="btn btn-primary" name="Show">Tìm Hiểu Thêm</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- PR BANNER -->
+
+
+    <section class="offer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="/Content/image-home-user/an vat ua thich.jpg" class="offer-img" alt="sản phẩm ưa thích nhất">
+                </div>
+                <div class="col-md-6">
+                    <h1>Một số sản phâm được ưa thích nhất</h1>
+                    <p>Một số loại bim bim, snack dễ thương, bánh gấu, .....</p>
+                    <div class="button">
+                        <a href="#" class="btn btn-dark">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!--Lí do-->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Tại sao nên chọn SAYUFOOD ?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <img src="/Content/image-home-user/doi tra.jpg" class="testimonial-img rounded-circle" alt="Person 1">
+                        <p class="testimonial-text">Đổi trả hoặc hoàn tiền nếu sản phẩm hư hoặc không đúng như mô tả hình ảnh sản phẩm đăng</p>
+                        <p class="testimonial-author">-Thứ nhất</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <img src="/Content/image-home-user/giao hang.png" class="testimonial-img rounded-circle" alt="Person 2">
+                        <p class="testimonial-text">Giao hàng đảm bảo chất lượng ATVSTP, giao hàng nhanh và đóng gói cẩn thận chắc chắn</p>
+                        <p class="testimonial-author">- Thứ hai</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <img src="/Content/image-home-user/ho tro.jpg" class="testimonial-img rounded-circle" alt="Person 3">
+                        <p class="testimonial-text">Chăm sóc khách hàng nhiệt tình và giải quyết các vấn đề một cách nhanh chóng nhất.</p>
+                        <p class="testimonial-author">-Thứ ba</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <br />
+    <br />
+    @*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>*@
+
+</body>
+</html>
+

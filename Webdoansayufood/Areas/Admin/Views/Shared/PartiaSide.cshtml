@@ -1,0 +1,121 @@
+﻿<!-- Sidebar -->
+<div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="~/Content/image-home-user/106520358_p0_master1200.png" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="/Admin/Home/Index" class="d-block">Tri Thuc</a>
+        </div>
+    </div>
+
+    <!-- SidebarSearch Form -->
+    @*<div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>*@
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+            with font-awesome or any other icon font library -->
+            <li class="nav-item">
+                <a href="/Admin/Role/Index" class="nav-link">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                    <p>
+                        Quản lý quyền
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Account/Index" class="nav-link">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                    <p>
+                        Quản lý tài khoản
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Category/Index" class="nav-link">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                    <p>
+                        Quản lý loại sản phẩm
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Product/Index" class="nav-link">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                    <p>
+                        Quản lý sản phẩm
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-history" aria-hidden="true"></i>
+                    <p>
+                        Quản lý đơn hàng
+
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <p>
+                        Thư
+
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-calculator" aria-hidden="true"></i>
+                    <p>
+                        Thống kê
+
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:document.getElementById('logOffForm').submit()" class="nav-link">
+
+                    <p>
+                        Đăng xuất
+
+                    </p>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+
+@if (Request.IsAuthenticated)
+{
+    <div style="display:none">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+        {
+            @Html.AntiForgeryToken()
+        }
+    </div>
+}
