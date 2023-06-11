@@ -8,6 +8,7 @@ using Webdoansayufood.Models;
 
 namespace Webdoansayufood.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin, Employe")]
     public class CategoryController : Controller
     {
         private ApplicationDbContext _dbcontext = new ApplicationDbContext();

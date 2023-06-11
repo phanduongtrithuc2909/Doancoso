@@ -1,0 +1,74 @@
+﻿@model Webdoansayufood.Models.Entity.Order
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Chi tiết đơn hàng</h1><br />
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Chi tiết đơn hàng</h3>
+
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Mã đơn hàng</label>
+                    <p class="form-control">@Model.code</p>
+                </div>
+                <div class="col-md-6">
+                    <label>Tên khách hàng</label>
+                    <p class="form-control">@Model.CustomerName</p>
+                </div>
+                <div class="col-md-6">
+                    <label>Số điện thoại</label>
+                    <p class="form-control">@Model.Phone</p>
+                </div>
+                <div class="col-md-6">
+                    <label>Email</label>
+                    <p class="form-control">@Model.Email</p>
+                </div>
+                <div class="col-md-6">
+                    <label>Địa chỉ giao</label>
+                    <p class="form-control">@Model.Address</p>
+                </div>
+                <div class="col-md-6">
+                    <label>Ngày tạo</label>
+                    <p class="form-control">@Model.CreateDate.ToString("dd/MM/yyyy")</p>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Danh sách sản phẩm</h2>
+                   
+                </div>
+                <div class="col-md-12">
+                    @Html.Action("Partial_Detail", "HistoryOrder", new { id = Model.Id })
+                </div>
+            </div>
+           
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+           
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+    
+
+</section>

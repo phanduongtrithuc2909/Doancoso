@@ -1,0 +1,35 @@
+﻿
+@model IEnumerable<Webdoansayufood.Models.Entity.OrderDetail>
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>STT</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                var i = 1;
+                <tr>
+                    <td></td>
+                    <td>@i</td>
+                    <td>@item.Product.Title</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>#</td>
+
+
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+}

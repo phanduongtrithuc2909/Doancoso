@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Webdoansayufood.Models;
+using Webdoansayufood.Models.Entity;
 
 namespace Webdoansayufood.Controllers
 {
@@ -101,24 +102,53 @@ namespace Webdoansayufood.Controllers
             return View(cart);
 
         }
-        //public ActionResult Checkoutsuccess(OrderViewModel )
-        //{
-        //    if (Session["Cart"] == null)
-        //        return RedirectToAction("Index", "ShoppingCart");
-        //    ShoppingCart cart = Session["Cart"] as ShoppingCart;
+
+        public ActionResult Checkoutt(FormCollection form)
+
+        {
+            Random random = new Random();
+            ShoppingCart cart = Session["Cart"] as ShoppingCart;
+            Order order = new Order();
+            order.CreateDate = DateTime.Now;
+            order.ModifiedDate = DateTime.Now;
+            order.CustomerName = form["CustomerName"];
+            order.Address = form["Address"];
+            order.Email = form["Email"];
+            order.Phone = form["Phone"];
+            order.code = "DH" + random.Next(0,9) + random.Next(0, 9) + random.Next(0, 9) + random.Next(0, 9); 
+            _db.Orders.Add(order);
+            foreach (var item in cart.Items)
+            {
+                OrderDetail detail = new OrderDetail();
+                detail.CreateDate = DateTime.Now;
+                detail.ModifiedDate = DateTime.Now;
+                detail.OrderId = order.Id;
+                detail.ProductId = item.Shopping_Product.Id;
+                detail.Quantity = item.Shopping_Quantity;
+                detail.Price = item.Shopping_Product.Price;
+                _db.OrderDetails.Add(detail);
+            }
+            _db.SaveChanges();
+            cart.ClearCart();
+            return RedirectToAction("Checkoutsucces", "ShoppingCart");
+        }
+
+    
 
 
-        //    return View(cart);
-
-        //}
-
-
-
+        public ActionResult Checkoutsucces()
+        {
+            return View();
+        }
 
 
 
 
 
 
-    }
+
+
+
+        }
+
 }

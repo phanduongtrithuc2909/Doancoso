@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using Webdoansayufood.Models.Entity;
 using Webdoansayufood.Models;
+using PagedList;
 
 namespace Webdoansayufood.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin, Employe")]
     public class ProductController : Controller
     {
         private ApplicationDbContext _dbcontext = new ApplicationDbContext();
@@ -16,10 +18,16 @@ namespace Webdoansayufood.Areas.Admin.Controllers
         {
             _dbcontext = new ApplicationDbContext();
         }
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var products = _dbcontext.Products;
-            return View(products);
+            var products = _dbcontext.Products.ToList();
+            int pagesize = 10;
+            int pageIndex = (page ?? 1);
+            products = products.OrderByDescending(x => x.Id).ToList();
+
+            
+            
+            return View(products.ToPagedList(pageIndex,pagesize));
         }
         public ActionResult Add()
         {
@@ -72,9 +80,8 @@ namespace Webdoansayufood.Areas.Admin.Controllers
 
             return View(model);
 
-        }
+        }   
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public JsonResult Delete(int? id)
         {
             var items = _dbcontext.Products.Find(id);

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Webdoansayufood.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin, Employe")]
     public class HomeController : Controller
     {
         // GET: Admin/Home

@@ -14,7 +14,7 @@
             <div class="breadcrumbs d-flex flex-row align-items-center" style="margin-bottom: 10px">
                 <ul>
                     <li><a href="~/home/index">Trang Chủ</a></li>
-                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản Phẩm</a></li>
+                    <li class="active"><a href="~/product/index"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản Phẩm</a></li>
                     <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Chi tiết : @Model.Title</a></li>
 
                 </ul>
@@ -35,7 +35,7 @@
                             <span class="ti-truck"></span><span>Giao hàng miễn phí</span>
                         </div>
                         <div class="original_price">--</div>
-                        <div class="product_price">@Model.Price</div>
+                        <div class="product_price">@Model.Price đ</div>
                         <ul class="star_rating">
                             <li><i class="fa fa-star" aria-hidden="true"></i></li>
                             <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -50,8 +50,8 @@
                                 <span id="quantity_value">@Model.Quantity</span>
                                 <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
                             </div>
-                            <div class="red_button add_to_cart_button"><a href="/ShoppingCart/AddToCart/@Model.Id">add to cart</a></div>
-                            <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+                            <div class="red_button add_to_cart_button"><a href="/ShoppingCart/AddToCart/@Model.Id">Thêm vào giỏ hàng</a></div>
+                            
                         </div>
                     </div>
                 </div>

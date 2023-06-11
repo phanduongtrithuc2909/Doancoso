@@ -51,6 +51,12 @@
       <HintPath>..\..\..\download\anh do an\ckfinder\ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -173,7 +179,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CateogryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HistoryOrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
@@ -189,11 +198,37 @@
     <Compile Include="Migrations\202306011427167_createdata.designer.cs">
       <DependentUpon>202306011427167_createdata.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306040458004_createorder.cs" />
+    <Compile Include="Migrations\202306040458004_createorder.designer.cs">
+      <DependentUpon>202306040458004_createorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306061128142_or.cs" />
+    <Compile Include="Migrations\202306061128142_or.designer.cs">
+      <DependentUpon>202306061128142_or.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306061216144_taag.cs" />
+    <Compile Include="Migrations\202306061216144_taag.designer.cs">
+      <DependentUpon>202306061216144_taag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306061227233_adad.cs" />
+    <Compile Include="Migrations\202306061227233_adad.designer.cs">
+      <DependentUpon>202306061227233_adad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306091352584_sadad.cs" />
+    <Compile Include="Migrations\202306091352584_sadad.designer.cs">
+      <DependentUpon>202306091352584_sadad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306111519487_kkk.cs" />
+    <Compile Include="Migrations\202306111519487_kkk.designer.cs">
+      <DependentUpon>202306111519487_kkk.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Entity\Category.cs" />
     <Compile Include="Models\Entity\Contact.cs" />
+    <Compile Include="Models\Entity\DetailOrder.cs" />
+    <Compile Include="Models\Entity\Order.cs" />
     <Compile Include="Models\Entity\Product.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -202,6 +237,59 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\aset\dist\css\adminlte.css" />
+    <Content Include="Content\aset\dist\css\adminlte.min.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.components.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.components.min.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.core.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.core.min.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.extra-components.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.extra-components.min.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.light.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.light.min.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.pages.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.pages.min.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.plugins.css" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Content\aset\dist\img\AdminLTELogo.png" />
+    <Content Include="Content\aset\dist\img\avatar.png" />
+    <Content Include="Content\aset\dist\img\avatar2.png" />
+    <Content Include="Content\aset\dist\img\avatar3.png" />
+    <Content Include="Content\aset\dist\img\avatar4.png" />
+    <Content Include="Content\aset\dist\img\avatar5.png" />
+    <Content Include="Content\aset\dist\img\boxed-bg.jpg" />
+    <Content Include="Content\aset\dist\img\boxed-bg.png" />
+    <Content Include="Content\aset\dist\img\credit\american-express.png" />
+    <Content Include="Content\aset\dist\img\credit\cirrus.png" />
+    <Content Include="Content\aset\dist\img\credit\mastercard.png" />
+    <Content Include="Content\aset\dist\img\credit\paypal.png" />
+    <Content Include="Content\aset\dist\img\credit\paypal2.png" />
+    <Content Include="Content\aset\dist\img\credit\visa.png" />
+    <Content Include="Content\aset\dist\img\default-150x150.png" />
+    <Content Include="Content\aset\dist\img\icons.png" />
+    <Content Include="Content\aset\dist\img\photo1.png" />
+    <Content Include="Content\aset\dist\img\photo2.png" />
+    <Content Include="Content\aset\dist\img\photo3.jpg" />
+    <Content Include="Content\aset\dist\img\photo4.jpg" />
+    <Content Include="Content\aset\dist\img\prod-1.jpg" />
+    <Content Include="Content\aset\dist\img\prod-2.jpg" />
+    <Content Include="Content\aset\dist\img\prod-3.jpg" />
+    <Content Include="Content\aset\dist\img\prod-4.jpg" />
+    <Content Include="Content\aset\dist\img\prod-5.jpg" />
+    <Content Include="Content\aset\dist\img\user1-128x128.jpg" />
+    <Content Include="Content\aset\dist\img\user2-160x160.jpg" />
+    <Content Include="Content\aset\dist\img\user3-128x128.jpg" />
+    <Content Include="Content\aset\dist\img\user4-128x128.jpg" />
+    <Content Include="Content\aset\dist\img\user5-128x128.jpg" />
+    <Content Include="Content\aset\dist\img\user6-128x128.jpg" />
+    <Content Include="Content\aset\dist\img\user7-128x128.jpg" />
+    <Content Include="Content\aset\dist\img\user8-128x128.jpg" />
+    <Content Include="Content\aset\dist\js\adminlte.js" />
+    <Content Include="Content\aset\dist\js\adminlte.min.js" />
+    <Content Include="Content\aset\dist\js\demo.js" />
+    <Content Include="Content\aset\dist\js\pages\dashboard.js" />
+    <Content Include="Content\aset\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\aset\dist\js\pages\dashboard3.js" />
     <Content Include="Content\aset\js\categories_custom.js" />
     <Content Include="Content\aset\js\contact_custom.js" />
     <Content Include="Content\aset\js\custom.js" />
@@ -1133,6 +1221,7 @@
     <Content Include="Content\ckfinder\ckfinder\skins\v1\uipanel.css" />
     <Content Include="Content\ckfinder\ckfinder\translations.txt" />
     <Content Include="Content\image-home-user\106520358_p0_master1200.png" />
+    <Content Include="Content\image-home-user\2021-sayu-anemo-character-genshin-impact-anime-video-game-wallpaper-3440x1440_15.jpg" />
     <Content Include="Content\image-home-user\an vat ua thich.jpg" />
     <Content Include="Content\image-home-user\anh-admin-sayu.jpg" />
     <Content Include="Content\image-home-user\anh-chibi-cute_014001732.png" />
@@ -1157,6 +1246,7 @@
     <Content Include="Content\image-home-user\trai-cay-say.jpg" />
     <Content Include="Content\image-home-user\trái cây sấy.jpg" />
     <Content Include="Content\image-home-user\twiter.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Page\dist\css\adminlte.css" />
     <Content Include="Content\Page\dist\css\adminlte.min.css" />
     <Content Include="Content\Page\dist\css\alt\adminlte.components.css" />
@@ -3193,6 +3283,31 @@
     <Content Include="Content\aset\plugins\themify-icons\fonts\themify.eot" />
     <Content Include="Content\aset\plugins\themify-icons\fonts\themify.ttf" />
     <Content Include="Content\aset\plugins\themify-icons\fonts\themify.woff" />
+    <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Content\aset\dist\css\adminlte.css.map" />
+    <Content Include="Content\aset\dist\css\adminlte.min.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.components.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.components.min.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.core.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.core.min.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.extra-components.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.light.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.light.min.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.pages.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.pages.min.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.plugins.css.map" />
+    <Content Include="Content\aset\dist\css\alt\adminlte.plugins.min.css.map" />
+    <Content Include="Content\aset\dist\js\.eslintrc.json" />
+    <Content Include="Content\aset\dist\js\adminlte.js.map" />
+    <Content Include="Content\aset\dist\js\adminlte.min.js.map" />
+    <Content Include="Areas\Admin\Views\HistoryOrder\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HistoryOrder\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\HistoryOrder\Partial_Detail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3240,14 +3355,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
-    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
     <Content Include="Views\ShoppingCart\Bagcart.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
+    <Content Include="Views\ShoppingCart\Checkoutsucces.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Cateogry\" />
     <Folder Include="Content\ckfinder\ckfinder\userfiles\" />
   </ItemGroup>
   <ItemGroup>
@@ -3266,6 +3381,24 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202306011427167_createdata.resx">
       <DependentUpon>202306011427167_createdata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306040458004_createorder.resx">
+      <DependentUpon>202306040458004_createorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306061128142_or.resx">
+      <DependentUpon>202306061128142_or.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306061216144_taag.resx">
+      <DependentUpon>202306061216144_taag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306061227233_adad.resx">
+      <DependentUpon>202306061227233_adad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306091352584_sadad.resx">
+      <DependentUpon>202306091352584_sadad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306111519487_kkk.resx">
+      <DependentUpon>202306111519487_kkk.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -3,7 +3,11 @@
 @{
     ViewBag.Title = "Thanh Toán";
 }
-
+<style>
+    .form{
+        width:50%;
+    }
+</style>
 <link href="~/Content/assets/styles/categories_responsive.css" rel="stylesheet" />
 <link href="~/Content/assets/styles/categories_styles.css" rel="stylesheet" />
 
@@ -17,102 +21,93 @@
                     <p>Hãy kiểm tra lại thông tin đơn hàng của bạn !!</p>
                 </div>
             </div>
-            @*<div class="row">
-                <div class="col-md-6">
-                    <h3>Thông tin khách hàng</h3>
-                    <div class="form-group">
-                        <label>Họ tên khách hàng</label>
-                        <input type="text" name="CustomerName" class="form-control" autocomplete="off" style="margin-right:0px" />
-                    </div>
-                    <div class="form-group">
-                        <label>Số điện thoại</label>
-                        <input type="text" name="Phone" class="form-control" autocomplete="off" />
-                    </div>
-                    <div class="form-group">
-                        <label>Địa chỉ</label>
-                        <input type="text" name="Address" class="form-control" autocomplete="off" />
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" name="Email" class="form-control" autocomplete="off" />
-                    </div>
-                    <div class="form-group">
-                        <label>Hình thức thanh toán</label>
-                        <select class="form-control" name="Payment" style="height: 35px">
-                            <option value="COD">COD</option>
-                            <option value="Banking">Chuyển khoản</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-success" style="width: 280px">Đặt hàng</button>
-                    </div>
-
-                </div>*@
-
-
-            <!--Check gio hang-->
-            @*<div class="col-md-6">*@
-            <div class="row>">
-                <div class="col-md-8" style="padding-left: 1px">
-                    <h3>Giỏ hàng của bạn</h3>
-                </div>
-                <div class="col-md-4" style="text-align:right">
-                    <h3>@Html.Action("Bagcart", "ShoppingCart")</h3>
-                </div>
-
-            </div>
-
-
-            @if (Model != null)
-            {
-                <table class="table" style="border:1px solid #000000">
-                    @foreach (var item in Model.Items)
-                    {
-                        double total = (double)item.Shopping_Product.Price * item.Shopping_Quantity;
-
-                        double sol = total / (double)item.Shopping_Product.Price;
-                        <tr>
-                            <td>
-                                @item.Shopping_Product.Title
-                            </td>
-                            <td>
-                                <img class="product-content-img " src="@item.Shopping_Product.Image" style="width:150px">
-                            </td>
-                            <td>
-                                @sol
-                            </td>
-                            <td>
-                                @item.Shopping_Product.Price
-                            </td>
-                        </tr>
-                    }
-                    <tr>
-                        <td>Tổng tiền giỏ hàng: </td>
-                        <td> </td>
-                        <td> </td>
-                        <td><b>@Model.Total_money()</b></td>
-                    </tr>
-                </table>
-
-            }
             <div class="row">
-                <div class="col-md-12" style="text-align:right">
-                    <a href="#" class="btn btn-success" style="width: 280px">Đặt hàng</a>
+                <div class="col-md-6">
+                    @using (Html.BeginForm("Checkoutt", "ShoppingCart"))
+                    {
+
+
+                        <h3>Thông tin khách hàng</h3>
+                        <div class="form-group">
+                            <label>Họ tên khách hàng</label>
+                            <input type="text" name="CustomerName" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" name="Phone" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ</label>
+                            <input type="text" name="Address" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="Email" class="form-control" required />
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success" onclick="return confirm('Bạn chắc chắn muốn đặt hàng ?')" style="width:280px">Đặt hàng</button>
+                        </div>
+
+
+                    }
                 </div>
-                <div class="col-md-12">
-                    <a href="/product/index" class="btn btn-default" style="width: 280px"><i class="fa fa-angle-left" aria-hidden="true" style="margin-right: 10px; font-size:20px"></i>Tiếp tục mua hàng</a>
+
+                    <!--Check gio hang-->
+                    <div class="col-md-6">
+                        <div class="row>">
+                            <div class="col-md-8" style="padding-left: 1px">
+                                <h3>Giỏ hàng của bạn</h3>
+                            </div>
+                            <div class="col-md-4" style="text-align:right">
+                                <h3>@Html.Action("Bagcart", "ShoppingCart")</h3>
+                            </div>
+
+                        </div>
+
+                        @if (Model != null)
+                        {
+                            <table class="table" style="border:1px solid #000000">
+                                @foreach (var item in Model.Items)
+                                {
+                                    double total = (double)item.Shopping_Product.Price * item.Shopping_Quantity;
+
+                                    double sol = total / (double)item.Shopping_Product.Price;
+                                    <tr>
+                                        <td>
+                                            @item.Shopping_Product.Title
+                                        </td>
+                                        <td>
+                                            <img class="product-content-img " src="@item.Shopping_Product.Image" style="width:150px">
+                                        </td>
+                                        <td>
+                                            @sol
+                                        </td>
+                                        <td>
+                                            @item.Shopping_Product.Price
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>Tổng tiền giỏ hàng: </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td><b>@Model.Total_money()</b></td>
+                                </tr>
+                            </table>
+
+                        }
+
+
+
+
+
+                    </div>
                 </div>
-
-            </div>
-
-
-
-
-        </div>
-        @*</div>*@
     </div>
 </div>
-@*</div>*@
+    </div>
+
 
 
 
