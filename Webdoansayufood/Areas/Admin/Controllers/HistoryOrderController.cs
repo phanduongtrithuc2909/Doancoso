@@ -45,8 +45,8 @@ namespace Webdoansayufood.Areas.Admin.Controllers
         }
         public ActionResult Partial_Detail(int id)
         {
-            var items = _dbcontext.OrderDetails.Where(x => x.Id == id).ToList();
-            return PartialView(items);
+            var items = _dbcontext.OrderDetails.Where(x => x.OrderId == id).ToList();
+                return PartialView(items);
         }
     }
 }

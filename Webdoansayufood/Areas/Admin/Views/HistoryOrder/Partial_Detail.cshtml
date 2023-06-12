@@ -1,7 +1,7 @@
-﻿
-@model IEnumerable<Webdoansayufood.Models.Entity.OrderDetail>
+﻿@model IEnumerable<Webdoansayufood.Models.Entity.OrderDetail>
 @if (Model != null && Model.Any())
 {
+    int i = 1;
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -17,14 +17,16 @@
 
             @foreach (var item in Model)
             {
-                var i = 1;
+                double total = (double)item.Product.Price * item.Quantity;
+
                 <tr>
                     <td></td>
                     <td>@i</td>
                     <td>@item.Product.Title</td>
                     <td>@item.Price</td>
                     <td>@item.Quantity</td>
-                    <td>#</td>
+                    <td>@total</td>
+
 
 
                 </tr>

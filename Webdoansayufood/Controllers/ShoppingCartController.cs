@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -129,6 +131,49 @@ namespace Webdoansayufood.Controllers
                 _db.OrderDetails.Add(detail);
             }
             _db.SaveChanges();
+
+            // Send Mail cho khach hang
+            var strSanPham = "";
+            var thanhtien = decimal.Zero;
+            var TongTien = decimal.Zero;
+            foreach (var sp in cart.Items)
+            {
+                strSanPham += "<tr>";
+                strSanPham += "<td>" + sp.Shopping_Product.Title + "</td>";
+                strSanPham += "<td>" + sp.Shopping_Quantity + "</td>";
+                strSanPham += "<td>" + sp.Shopping_Product.Price + "</td>";
+                strSanPham += "<td>" + Webdoansayufood.Common.Common.FormatNumber(sp.Shopping_Total, 0) + "</td>";
+                strSanPham += "</tr>";
+                thanhtien += sp.Shopping_Product.Price * sp.Shopping_Quantity;
+            }
+            TongTien = thanhtien;
+            string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/Content/SendMail/HtmlPage2.html"));
+            contentCustomer = contentCustomer.Replace("{{MaDon}}", order.code);
+            contentCustomer = contentCustomer.Replace("{{SanPham}}", strSanPham);
+            contentCustomer = contentCustomer.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy"));
+            contentCustomer = contentCustomer.Replace("{{TenKhachHang}}", order.CustomerName);
+            contentCustomer = contentCustomer.Replace("{{Phone}}", order.Phone);
+            contentCustomer = contentCustomer.Replace("{{Email}}", order.Email);
+            contentCustomer = contentCustomer.Replace("{{DiaChiNhanHang}}", order.Address);
+            contentCustomer = contentCustomer.Replace("{{ThanhTien}}", Webdoansayufood.Common.Common.FormatNumber(thanhtien, 0));
+            contentCustomer = contentCustomer.Replace("{{TongTien}}", Webdoansayufood.Common.Common.FormatNumber(TongTien, 0));
+            Webdoansayufood.Common.Common.SendMail("ShopOnline", "Đơn hàng #" + order.code, contentCustomer.ToString(), order.Email);
+
+            string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/Content/SendMail/HtmlPage1.html"));
+            contentAdmin = contentAdmin.Replace("{{MaDon}}", order.code);
+            contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
+            contentAdmin = contentAdmin.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy"));
+            contentAdmin = contentAdmin.Replace("{{TenKhachHang}}", order.CustomerName);
+            contentAdmin = contentAdmin.Replace("{{Phone}}", order.Phone);
+            contentAdmin = contentAdmin.Replace("{{Email}}", order.Email);
+            contentAdmin = contentAdmin.Replace("{{DiaChiNhanHang}}", order.Address);
+            contentAdmin = contentAdmin.Replace("{{ThanhTien}}", Webdoansayufood.Common.Common.FormatNumber(thanhtien, 0));
+            contentAdmin = contentAdmin.Replace("{{TongTien}}", Webdoansayufood.Common.Common.FormatNumber(TongTien, 0));
+            Webdoansayufood.Common.Common.SendMail("ShopOnline", "Đơn hàng mới #" + order.code, contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
+
+
+
+
             cart.ClearCart();
             return RedirectToAction("Checkoutsucces", "ShoppingCart");
         }

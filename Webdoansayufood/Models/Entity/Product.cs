@@ -28,5 +28,6 @@ namespace Webdoansayufood.Models.Entity
         public int Quantity { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

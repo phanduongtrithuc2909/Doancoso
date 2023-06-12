@@ -186,6 +186,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Common\Common.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -3138,6 +3139,8 @@
     <Content Include="Content\Page\plugins\uplot\uPlot.iife.js" />
     <Content Include="Content\Page\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Content\Page\plugins\uplot\uPlot.min.css" />
+    <Content Include="Content\SendMail\HtmlPage1.html" />
+    <Content Include="Content\SendMail\HtmlPage2.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
