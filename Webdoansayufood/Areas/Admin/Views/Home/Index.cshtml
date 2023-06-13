@@ -1,9 +1,36 @@
-﻿
+﻿@model  PagedList.IPagedList<Webdoansayufood.Models.Entity.Order>
+@using PagedList.Mvc;
+@using PagedList;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<style>
 
+    .pagination-container {
+    }
+
+        .pagination-container li {
+            display: flex;
+        }
+
+        .pagination-container a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
+
+        .pagination-container .active > a {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+   
+</style>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -19,4 +46,200 @@
         </div>
     </div><!-- /.container-fluid -->
 </section>
+<section class="content">
 
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Biểu đồ danh thu</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <a href="/Admin/Statistical/Index" class="btn btn-success">Xem chi tiết</a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="chart">
+
+                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</section>
+
+<section class="content">
+
+                <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Danh sách đơn đặt hàng</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <a href="/Admin/HistoryOrder/Index" class="btn btn-success">Xem chi tiết</a>
+                    </div>
+
+                </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>STT</th>
+                                    <th>Tên khách hàng</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ giao</th>
+                                    <th>Ngày đặt hàng</th>
+                                    
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    var i = 1;
+                                    foreach (var item in Model)
+                                    {
+                                        <tr id="trow_@item.Id">
+                                            <td></td>
+                                            <td>@i</td>
+                                            <td>@item.CustomerName</td>
+                                            <td>@item.Phone</td>
+                                            <td>@item.Address</td>
+                                            <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
+                                            
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4">
+                                            Không có bản ghi nào !!
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <div style="margin-top :30px">
+
+                            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+                        </div>
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
+
+
+            </section>
+
+            @section scripts{
+                <script src="~/Content/Page/plugins/chart.js/Chart.min.js"></script>
+                <script src="~/Content/aset/plugins/moment/moment.min.js"></script>
+                <script>
+                    $(function () {
+                        /* ChartJS
+                         * -------
+                         * Here we will create a few charts using ChartJS
+                         */
+
+                        var arrDoanhThu = [];
+                        var arrLoiNhuan = [];
+                        var arrDate = [];
+                        $.ajax({
+                            url: '/Statistical/GetStatistical',
+                            type: 'GET',
+                            data: { fromDate: '', toDate: '' },
+                            success: function (rs) {
+
+                                $.each(rs.Data, function (i, item) {
+                                    var strDate = moment(item.Date).format('DD/MM/yyyy');
+                                    arrDate.push(strDate);
+                                    arrDoanhThu.push(item.DoanhThu);
+                                    arrLoiNhuan.push(item.LoiNhuan);
+                                });
+                                var areaChartData = {
+                                    labels: arrDate,
+                                    datasets: [
+                                        {
+                                            label: 'Lợi nhuận',
+                                            backgroundColor: 'rgba(60,141,188,0.9)',
+                                            borderColor: 'rgba(60,141,188,0.8)',
+                                            pointRadius: false,
+                                            pointColor: '#3b8bba',
+                                            pointStrokeColor: 'rgba(60,141,188,1)',
+                                            pointHighlightFill: '#fff',
+                                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                                            data: arrLoiNhuan
+                                        },
+                                        {
+                                            label: 'Danh thu',
+                                            backgroundColor: 'rgba(210, 214, 222, 1)',
+                                            borderColor: 'rgba(210, 214, 222, 1)',
+                                            pointRadius: false,
+                                            pointColor: 'rgba(210, 214, 222, 1)',
+                                            pointStrokeColor: '#c1c7d1',
+                                            pointHighlightFill: '#fff',
+                                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                                            data: arrDoanhThu
+                                        },
+                                    ]
+                                }
+                                //-------------
+                                //- BAR CHART -
+                                //-------------
+                                var barChartCanvas = $('#barChart').get(0).getContext('2d')
+                                var barChartData = $.extend(true, {}, areaChartData)
+                                var temp0 = areaChartData.datasets[0]
+                                var temp1 = areaChartData.datasets[1]
+                                barChartData.datasets[0] = temp1
+                                barChartData.datasets[1] = temp0
+
+                                var barChartOptions = {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    datasetFill: false
+                                }
+
+                                new Chart(barChartCanvas, {
+                                    type: 'bar',
+                                    data: barChartData,
+                                    options: barChartOptions
+                                });
+                                load_data(rs.Data);
+                            }
+                        });
+
+
+                    })
+
+                    function load_data(data) {
+                        var strHtml = "";
+                        $.each(data, function (i, item) {
+                            var strDate = moment(item.Date).format('DD/MM/yyyy');
+                            strHtml += "<tr>";
+                            strHtml += "<td>" + (i + 1) + "</td>";
+                            strHtml += "<td>" + strDate + "</td>";
+                            strHtml += "<td>" + item.DoanhThu + "</td>";
+                            strHtml += "<td>" + item.LoiNhuan + "</td>";
+                            strHtml += "</tr>";
+                        });
+                        $('#load_data').html(strHtml);
+                    }
+                </script>
+            }

@@ -81,9 +81,16 @@
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Giá</label>
-                                            @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @placeholder = "Giá" })
+                                            <label for="exampleInputEmail1">Giá bán</label>
+                                            @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @placeholder = "Giá bán" })
                                             @Html.ValidationMessageFor(x => x.Price, null, new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Giá gốc</label>
+                                            @Html.TextBoxFor(x => x.OriginalPrice, new { @class = "form-control", @placeholder = "Giá gốc" })
+                                            @Html.ValidationMessageFor(x => x.OriginalPrice, null, new { @class = "text-danger" })
                                         </div>
                                     </div>
 

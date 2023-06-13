@@ -98,10 +98,11 @@
                         <th>Tên sản phẩm</th>
                         <th>Loại sản phẩm</th>
                         <th>Số lượng</th>
-                        <th>Giá</th>
+                        <th>Giá bán</th>
+                        <th>Giá gốc</th>
                         <th>Ngày tạo</th>
                         <th>Chức năng</th>
-                       
+
                     </tr>
                 </thead>
                 <tbody>
@@ -118,6 +119,7 @@
                                 <td>@item.Category.Title</td>
                                 <td>@item.Quantity</td>
                                 <td>@item.Price</td>
+                                <td>@item.OriginalPrice</td>
                                 <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
                                 <td>
                                     <a href="/Admin/Product/Edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>

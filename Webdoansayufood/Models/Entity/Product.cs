@@ -25,6 +25,7 @@ namespace Webdoansayufood.Models.Entity
         [StringLength(500)]
         public string Image { get; set; }
         public decimal Price { get; set; }
+        public decimal OriginalPrice { get; set; }
         public int Quantity { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
